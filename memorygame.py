@@ -12,9 +12,9 @@ CARD_SIZE = (100, 100)
 GRID_SIZE = (4, 4)
 CARD_COUNT = GRID_SIZE[0] * GRID_SIZE[1]
 FPS = 30
-BACKGROUND_COLOR = (245, 245, 220)  # Light beige background
-CARD_COLOR = (156, 124, 56)         # Brownish color for cards
-TEXT_COLOR = (37, 53, 41)           # Dark green text color
+BACKGROUND_COLOR = (245, 245, 220)  
+CARD_COLOR = (156, 124, 56)         
+TEXT_COLOR = (37, 53, 41)           
 
 # Load card images
 def load_images():
@@ -24,22 +24,22 @@ def load_images():
             image = pygame.image.load(f"images/card_{i}.png")
             image = pygame.transform.scale(image, CARD_SIZE)
             images.append(image)
-            images.append(image)  # Add the pair of the image
-        random.shuffle(images)  # Shuffle images
+            images.append(image) 
+        random.shuffle(images)  
         return images
     except Exception as e:
         print(f"Error loading images: {e}")
         pygame.quit()
         sys.exit()
 
-# Create the display surface
+# Create the display
 window = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Memory Game")
 
 # Initialize font
 font = pygame.font.Font(None, 36)
 
-# Function to draw the grid of cards and stats
+#draw the grid of cards
 def draw_grid(cards, flipped, matches, moves, elapsed_time):
     window.fill(BACKGROUND_COLOR)
     
@@ -57,7 +57,7 @@ def draw_grid(cards, flipped, matches, moves, elapsed_time):
                 pygame.draw.rect(window, CARD_COLOR, rect)
                 pygame.draw.rect(window, TEXT_COLOR, rect, 3)
     
-    # Draw stats
+    # Draw
     moves_text = font.render(f"Moves: {moves}", True, TEXT_COLOR)
     time_text = font.render(f"Time: {int(elapsed_time)}s", True, TEXT_COLOR)
     window.blit(moves_text, (10, WINDOW_SIZE[1] - 60))
@@ -69,7 +69,6 @@ def draw_grid(cards, flipped, matches, moves, elapsed_time):
 def generate_cards(images):
     return [[images.pop() for _ in range(GRID_SIZE[1])] for _ in range(GRID_SIZE[0])]
 
-# Main game loop
 def main():
     clock = pygame.time.Clock()
     images = load_images()
